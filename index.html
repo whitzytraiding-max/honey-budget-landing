@@ -3,449 +3,529 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Honey Budget — The Couples Budgeting App</title>
-  <meta name="description" content="Honey Budget helps couples manage money together — shared expenses, AI coaching, savings goals, and more. Built for couples. Works solo too." />
+  <title>Honey Budget — Built for Couples</title>
+  <meta name="description" content="The budgeting app built for couples. Shared dashboard, AI financial coach, savings goals, and bill tracking. Works great solo too." />
   <meta property="og:title" content="Honey Budget — Built for Couples" />
-  <meta property="og:description" content="Stop arguing about money. Start budgeting together. Honey Budget gives couples a shared financial view with an AI coach to guide you." />
+  <meta property="og:description" content="Shared dashboard. AI financial coach. Savings goals. Built for couples — works great solo too." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          fontFamily: {
+            sans: ['"Avenir Next"', '"Trebuchet MS"', '"Segoe UI"', 'sans-serif'],
+            serif: ['"Playfair Display"', '"Iowan Old Style"', '"Palatino Linotype"', '"Book Antiqua"', 'Georgia', 'serif'],
+          },
           colors: {
-            navy: { 900: '#0f2338', 800: '#17385d', 700: '#1e4a7a', 600: '#245188' },
-            honey: { 400: '#f59e0b', 500: '#d97706', 300: '#fcd34d' },
+            hb: {
+              900: '#10253f',
+              800: '#17385d',
+              700: '#245188',
+              gold: '#f3bf29',
+              'gold-dim': '#ffd75a',
+              green: '#16995a',
+              'green-bright': '#22b36b',
+              ink: '#e5eef6',
+              'ink-soft': '#aec0d7',
+            },
           },
         },
       },
     }
   </script>
   <style>
-    html { scroll-behavior: smooth; }
-    .gradient-hero { background: linear-gradient(135deg, #0f2338 0%, #17385d 50%, #1e4a7a 100%); }
-    .gradient-text { background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .gradient-honey { background: linear-gradient(135deg, #f59e0b, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .card-glow { box-shadow: 0 20px 60px -12px rgba(56, 189, 248, 0.15), 0 0 0 1px rgba(56, 189, 248, 0.08); }
-    .phone-glow { box-shadow: 0 40px 80px -20px rgba(56, 189, 248, 0.3); }
-    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-    .float { animation: float 4s ease-in-out infinite; }
-    @keyframes float-slow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
-    .float-slow { animation: float-slow 6s ease-in-out infinite; }
-    .feature-card:hover { transform: translateY(-4px); transition: transform 0.3s ease; }
-    .feature-card { transition: transform 0.3s ease; }
+    :root {
+      --bg-page:
+        radial-gradient(circle at top center, rgba(243, 191, 41, 0.14), transparent 18%),
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.22), transparent 34%),
+        linear-gradient(180deg, #071225 0%, #0b1730 55%, #0e1f39 100%);
+      --surface: rgba(13, 24, 43, 0.86);
+      --surface-strong: rgba(13, 24, 43, 0.94);
+      --border: rgba(82, 113, 157, 0.48);
+      --shadow: 0 24px 70px -28px rgba(2, 6, 23, 0.72);
+      --gold: #f3bf29;
+      --green: #16995a;
+    }
+
+    html { scroll-behavior: smooth; min-height: 100%; background: var(--bg-page); background-attachment: fixed; }
+    body { margin: 0; font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif; color: #e5eef6; background: transparent; min-height: 100vh; }
+    h1, h2, h3, h4 { font-family: "Playfair Display", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+
+    .hb-surface-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .hb-panel-soft {
+      background: linear-gradient(180deg, rgba(20, 34, 58, 0.94), rgba(13, 24, 43, 0.92));
+      border: 1px solid var(--border);
+    }
+    .hb-panel-mint {
+      background:
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.14), transparent 32%),
+        linear-gradient(180deg, rgba(18, 36, 52, 0.94), rgba(13, 24, 43, 0.92));
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    .hb-panel-gold {
+      background:
+        radial-gradient(circle at top left, rgba(243, 191, 41, 0.18), transparent 34%),
+        linear-gradient(135deg, rgba(25, 41, 67, 0.96), rgba(13, 24, 43, 0.94));
+      border: 1px solid rgba(243, 191, 41, 0.2);
+    }
+    .hb-panel-multi {
+      background:
+        radial-gradient(circle at top left, rgba(243, 191, 41, 0.12), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.14), transparent 30%),
+        linear-gradient(135deg, rgba(21, 36, 61, 0.96), rgba(13, 24, 43, 0.94));
+      border: 1px solid var(--border);
+    }
+    .hb-hero-panel {
+      background:
+        radial-gradient(circle at 78% 18%, rgba(253, 224, 71, 0.18), transparent 16%),
+        radial-gradient(circle at 18% 100%, rgba(34, 197, 94, 0.18), transparent 22%),
+        radial-gradient(circle at 50% 40%, rgba(96, 165, 250, 0.16), transparent 30%),
+        linear-gradient(180deg, #204474 0%, #183657 48%, #10253f 100%);
+    }
+    .hb-button-primary {
+      background: linear-gradient(135deg, #10253f, #245188);
+      color: white;
+      box-shadow: 0 18px 40px -22px rgba(16, 37, 63, 0.6);
+    }
+    .hb-button-gold {
+      background: linear-gradient(135deg, #f3bf29, #ffd75a);
+      color: #10253f;
+      box-shadow: 0 16px 38px -16px rgba(243, 191, 41, 0.5);
+      font-weight: 700;
+    }
+    .hb-button-gold:hover { filter: brightness(1.06); }
+    .hb-kicker {
+      color: #aec0d7;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .hb-progress-track { background: rgba(27, 40, 66, 0.9); }
+    .hb-progress-fill { background: linear-gradient(90deg, #22b36b, #f3bf29, #8cc8ff); }
+
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .float { animation: float 5s ease-in-out infinite; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp 0.6s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    .nav-blur { background: rgba(7,18,37,0.82); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(82,113,157,0.3); }
+
+    .section-sep { height: 1px; background: linear-gradient(90deg, transparent, rgba(82,113,157,0.4), transparent); margin: 0 2rem; }
   </style>
 </head>
-<body class="font-sans bg-white text-slate-900 antialiased">
+<body>
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <!-- Logo -->
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-black text-sm">H</div>
-        <span class="font-bold text-navy-800 text-lg">Honey Budget</span>
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl flex items-center justify-center font-black text-sm" style="background:linear-gradient(135deg,#f3bf29,#ffd75a);color:#10253f;">H</div>
+        <span class="font-semibold text-hb-ink text-[15px] tracking-tight">Honey Budget</span>
       </div>
-      <!-- Links -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-        <a href="#features" class="hover:text-navy-800 transition-colors">Features</a>
-        <a href="#how-it-works" class="hover:text-navy-800 transition-colors">How it works</a>
-        <a href="#pricing" class="hover:text-navy-800 transition-colors">Pricing</a>
+      <div class="hidden md:flex items-center gap-7 text-sm text-hb-ink-soft">
+        <a href="#features" class="hover:text-hb-ink transition-colors">Features</a>
+        <a href="#coach" class="hover:text-hb-ink transition-colors">AI Coach</a>
+        <a href="#pricing" class="hover:text-hb-ink transition-colors">Pricing</a>
       </div>
-      <!-- CTA -->
       <div class="flex items-center gap-3">
-        <a href="https://app.honeybudget.app" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors hidden sm:block">Sign in</a>
-        <a href="https://app.honeybudget.app/register" class="bg-navy-800 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-navy-700 transition-colors">Start free</a>
+        <a href="https://app.honeybudget.app" class="text-sm text-hb-ink-soft hover:text-hb-ink transition-colors hidden sm:block">Sign in</a>
+        <a href="https://app.honeybudget.app/register" class="hb-button-gold text-sm px-5 py-2.5 rounded-xl transition-all">Start free</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="gradient-hero pt-32 pb-24 px-6 overflow-hidden relative">
-    <!-- Background blobs -->
-    <div class="absolute top-20 right-10 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-10 left-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <section class="pt-36 pb-28 px-6 relative overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-[500px] pointer-events-none" style="background:radial-gradient(ellipse at 50% 0%, rgba(243,191,41,0.08), transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.1), transparent 50%);"></div>
 
-    <div class="max-w-6xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <!-- Left: copy -->
-        <div>
-          <div class="inline-flex items-center gap-2 bg-white/10 text-sky-200 text-xs font-semibold px-4 py-2 rounded-full mb-6 border border-white/10">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            Now live on iOS &amp; Android
-          </div>
-          <h1 class="text-5xl sm:text-6xl font-black text-white leading-[1.05] tracking-tight">
-            Money harmony<br />
-            <span class="gradient-text">starts here.</span>
-          </h1>
-          <p class="mt-6 text-lg text-slate-300 leading-relaxed max-w-lg">
-            Honey Budget is the budgeting app <strong class="text-white">built for couples</strong> — shared expenses, an AI financial coach, savings goals, and a real-time view of your money together. Works great solo too.
-          </p>
-          <div class="mt-10 flex flex-col sm:flex-row gap-4">
-            <a href="https://app.honeybudget.app/register" class="inline-flex items-center justify-center gap-2 bg-white text-navy-900 font-bold px-8 py-4 rounded-2xl hover:bg-sky-50 transition-colors text-base shadow-xl">
-              Start for free
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
-            </a>
-            <a href="#how-it-works" class="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold px-8 py-4 rounded-2xl hover:bg-white/15 transition-colors text-base border border-white/10">
-              See how it works
-            </a>
-          </div>
-          <p class="mt-4 text-sm text-slate-400">No credit card needed &bull; Free to start &bull; Available on iOS &amp; Android</p>
-          <!-- App store badges -->
-          <div class="mt-6 flex gap-3 flex-wrap">
-            <a href="#" class="flex items-center gap-2 bg-black text-white text-xs font-medium px-4 py-2.5 rounded-xl hover:bg-slate-800 transition-colors border border-white/10">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-              App Store
-            </a>
-            <a href="#" class="flex items-center gap-2 bg-black text-white text-xs font-medium px-4 py-2.5 rounded-xl hover:bg-slate-800 transition-colors border border-white/10">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="m3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z" opacity=".5"/><path d="M3.55 20.91 13.68 12 3.55 3.09C3.21 3.3 3 3.67 3 4.09v15.82c0 .42.21.79.55 1zm.49-17.4 10.69 9.19-3.03 3.03L3.45 5.03c.07-.2.2-.37.36-.5zm6.45 9.37 1.38-1.38 3.28 3.28-1.07.65-3.59-2.55z"/></svg>
-              Google Play
-            </a>
-          </div>
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-[1fr_420px] gap-16 items-center">
+      <div class="fade-up">
+        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-7" style="background:rgba(243,191,41,0.12);color:#ffd75a;border:1px solid rgba(243,191,41,0.2);">
+          <span class="w-1.5 h-1.5 rounded-full bg-hb-green-bright animate-pulse inline-block"></span>
+          Built for couples · Works solo too
         </div>
 
-        <!-- Right: phone mockup -->
-        <div class="flex justify-center lg:justify-end">
-          <div class="relative">
-            <!-- Glow ring -->
-            <div class="absolute inset-0 bg-gradient-to-br from-sky-400/30 to-indigo-500/30 rounded-[3rem] blur-2xl scale-110"></div>
-            <!-- Phone frame -->
-            <div class="relative float w-[280px] sm:w-[320px] bg-navy-900 rounded-[3rem] p-3 phone-glow border border-white/10">
-              <div class="bg-slate-950 rounded-[2.5rem] overflow-hidden">
-                <!-- Status bar -->
-                <div class="bg-navy-800 px-6 pt-4 pb-3">
-                  <div class="flex justify-between items-center text-white/60 text-[10px]">
-                    <span>9:41</span>
-                    <div class="w-20 h-5 bg-slate-950 rounded-full"></div>
-                    <span>●●●</span>
-                  </div>
-                </div>
-                <!-- App content mockup -->
-                <div class="bg-slate-50 px-4 py-4 space-y-3">
-                  <!-- Header -->
-                  <div class="flex justify-between items-start">
-                    <div>
-                      <p class="text-[10px] text-slate-500">Good morning</p>
-                      <p class="text-sm font-bold text-slate-900">Sarah &amp; James 💑</p>
-                    </div>
-                    <div class="w-7 h-7 rounded-full bg-gradient-to-br from-sky-400 to-indigo-500"></div>
-                  </div>
-                  <!-- Balance card -->
-                  <div class="bg-navy-800 rounded-2xl px-4 py-3 text-white">
-                    <p class="text-[10px] opacity-70">This month's budget</p>
-                    <p class="text-2xl font-black mt-0.5">$3,240</p>
-                    <div class="mt-2 bg-white/20 rounded-full h-1.5">
-                      <div class="bg-emerald-400 h-1.5 rounded-full" style="width:58%"></div>
-                    </div>
-                    <div class="flex justify-between mt-1">
-                      <p class="text-[9px] opacity-60">Spent: $1,879</p>
-                      <p class="text-[9px] opacity-60">58% used</p>
-                    </div>
-                  </div>
-                  <!-- Quick stats -->
-                  <div class="grid grid-cols-2 gap-2">
-                    <div class="bg-white rounded-xl p-2.5 shadow-sm">
-                      <p class="text-[9px] text-slate-500 font-medium uppercase tracking-wide">Saved</p>
-                      <p class="text-sm font-bold text-emerald-600 mt-0.5">$640</p>
-                    </div>
-                    <div class="bg-white rounded-xl p-2.5 shadow-sm">
-                      <p class="text-[9px] text-slate-500 font-medium uppercase tracking-wide">Bills</p>
-                      <p class="text-sm font-bold text-slate-900 mt-0.5">$1,100</p>
-                    </div>
-                  </div>
-                  <!-- AI coach bubble -->
-                  <div class="bg-amber-50 border border-amber-200 rounded-2xl px-3 py-2.5">
-                    <p class="text-[9px] font-semibold text-amber-700 uppercase tracking-wide">🧠 Coach Alex</p>
-                    <p class="text-[10px] text-amber-900 mt-1 leading-4">Great work this month! Your dining spend is $80 under target. Consider moving that to your holiday fund.</p>
-                  </div>
-                  <!-- Transactions -->
-                  <div class="bg-white rounded-xl p-2.5 shadow-sm space-y-1.5">
-                    <p class="text-[9px] font-semibold text-slate-500 uppercase tracking-wide">Recent</p>
-                    <div class="flex justify-between items-center">
-                      <p class="text-[10px] text-slate-700">🛒 Grocery run</p>
-                      <p class="text-[10px] font-semibold text-slate-900">-$84</p>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <p class="text-[10px] text-slate-700">☕ Coffee</p>
-                      <p class="text-[10px] font-semibold text-slate-900">-$6</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <h1 class="text-5xl sm:text-6xl font-black text-hb-ink leading-[1.06] tracking-tight">
+          Your finances,<br/>finally on the<br/><span style="color:#f3bf29;">same page.</span>
+        </h1>
+
+        <p class="mt-6 text-[17px] leading-[1.75] text-hb-ink-soft max-w-md">
+          Honey Budget gives couples one shared view of their money — combined income, individual spending, shared bills, and an AI coach that knows your situation and gives real advice.
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-4 items-center">
+          <a href="https://app.honeybudget.app/register" class="hb-button-gold inline-flex items-center gap-2 px-8 py-4 rounded-[1.1rem] text-[15px] transition-all">
+            Get started — it's free
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+          </a>
+          <a href="#features" class="text-sm text-hb-ink-soft hover:text-hb-ink transition-colors underline underline-offset-4 decoration-hb-ink-soft/40">See what's included</a>
+        </div>
+
+        <div class="mt-8 flex items-center gap-6 text-xs text-hb-ink-soft">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-hb-green-bright flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            No credit card needed
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-hb-green-bright flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            iOS &amp; Android
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-hb-green-bright flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Partner invite included
+          </span>
+        </div>
+      </div>
+
+      <!-- App card mockup -->
+      <div class="float fade-up delay-200 hidden lg:block">
+        <div class="hb-surface-card rounded-[2rem] p-5 max-w-[360px] mx-auto" style="box-shadow: 0 40px 80px -20px rgba(2,6,23,0.8), 0 0 0 1px rgba(82,113,157,0.3);">
+
+          <!-- Header -->
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <p class="hb-kicker">April 2026</p>
+              <h3 class="text-lg font-semibold text-hb-ink mt-0.5">Sarah &amp; James</h3>
+            </div>
+            <div class="flex -space-x-2">
+              <div class="w-8 h-8 rounded-full border-2 border-[#0b1730] flex items-center justify-center text-xs font-bold" style="background:linear-gradient(135deg,#245188,#10253f);color:#e5eef6;">S</div>
+              <div class="w-8 h-8 rounded-full border-2 border-[#0b1730] flex items-center justify-center text-xs font-bold" style="background:linear-gradient(135deg,#22b36b,#16995a);color:#fff;">J</div>
             </div>
           </div>
+
+          <!-- Hero balance panel -->
+          <div class="hb-hero-panel rounded-[1.4rem] px-5 py-5 text-white mb-4">
+            <p class="text-[10px] font-semibold uppercase tracking-[0.22em] opacity-60">Remaining this month</p>
+            <p class="text-4xl font-semibold tracking-tight mt-1.5" style="letter-spacing:-0.04em;">$1,361</p>
+            <div class="mt-3 hb-progress-track rounded-full h-1.5 overflow-hidden">
+              <div class="hb-progress-fill h-full rounded-full" style="width:58%"></div>
+            </div>
+            <div class="flex justify-between mt-1.5 text-[10px] opacity-60">
+              <span>$1,879 spent</span>
+              <span>58% of $3,240</span>
+            </div>
+          </div>
+
+          <!-- Stats row -->
+          <div class="grid grid-cols-3 gap-2 mb-4">
+            <div class="hb-panel-soft rounded-[1rem] p-3">
+              <p class="hb-kicker text-[9px]">Cash</p>
+              <p class="text-sm font-semibold text-hb-ink mt-1">$320</p>
+              <p class="text-[9px] text-hb-ink-soft">left</p>
+            </div>
+            <div class="hb-panel-soft rounded-[1rem] p-3">
+              <p class="hb-kicker text-[9px]">Card</p>
+              <p class="text-sm font-semibold text-hb-ink mt-1">$1,041</p>
+              <p class="text-[9px] text-hb-ink-soft">left</p>
+            </div>
+            <div class="hb-panel-mint rounded-[1rem] p-3">
+              <p class="hb-kicker text-[9px]">Saved</p>
+              <p class="text-sm font-semibold mt-1" style="color:#4ade80;">$640</p>
+              <p class="text-[9px] text-hb-ink-soft">this mo.</p>
+            </div>
+          </div>
+
+          <!-- Coach tip -->
+          <div class="hb-panel-gold rounded-[1.2rem] px-4 py-3.5">
+            <p class="hb-kicker" style="color:#ffd75a;">✦ Coach Alex</p>
+            <p class="text-xs text-hb-ink leading-[1.6] mt-1.5">Dining is $80 under budget this month — nice. Move that to your holiday fund and you'll hit your goal 3 weeks early.</p>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SOCIAL PROOF BAR -->
-  <section class="bg-slate-50 border-y border-slate-100 py-8 px-6">
-    <div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-x-12 gap-y-4 text-slate-500 text-sm font-medium">
-      <div class="flex items-center gap-2">
-        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-        AI financial coach included
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-        Shared couples view
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-        Multi-currency support
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-        iOS &amp; Android
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-        Free to start
-      </div>
-    </div>
-  </section>
+  <div class="section-sep"></div>
 
   <!-- FEATURES -->
   <section id="features" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-sky-600 font-semibold text-sm uppercase tracking-widest mb-3">Everything you need</p>
-        <h2 class="text-4xl sm:text-5xl font-black text-slate-900 leading-tight">Built for the way <br class="hidden sm:block"/>couples actually live</h2>
-        <p class="mt-4 text-lg text-slate-500 max-w-xl mx-auto">One shared dashboard. Individual spending. A coach that knows both of you. No spreadsheets required.</p>
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-14">
+        <p class="hb-kicker mb-3">What you get</p>
+        <h2 class="text-4xl font-black text-hb-ink leading-tight max-w-lg">Everything a couple needs to manage money together</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Bento grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-        <!-- Feature 1 -->
-        <div class="feature-card card-glow bg-white rounded-3xl p-8 border border-slate-100">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-100 to-blue-100 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
+        <!-- Shared dashboard — spans 2 cols on large -->
+        <div class="hb-surface-card rounded-[1.75rem] p-7 lg:col-span-2">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center flex-shrink-0" style="background:rgba(36,81,136,0.3);border:1px solid rgba(36,81,136,0.4);">
+              <svg class="w-5 h-5" style="color:#8cc8ff;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-hb-ink">One dashboard, two people</h3>
+              <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Both partners see combined income, individual cash and card spending, shared bills, and savings — all updating in real time. No more "how much did you spend?" conversations.</p>
+            </div>
           </div>
-          <h3 class="text-lg font-bold text-slate-900">Shared couples dashboard</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Both partners see the same real-time picture — combined income, shared bills, individual spending, and savings progress. Total financial clarity, together.</p>
+          <!-- Mini visual -->
+          <div class="mt-5 grid grid-cols-2 gap-2">
+            <div class="hb-panel-soft rounded-[1rem] p-3.5">
+              <p class="hb-kicker text-[9px]">Household income</p>
+              <p class="text-xl font-semibold text-hb-ink mt-1.5" style="letter-spacing:-0.03em;">$6,800</p>
+              <p class="text-[10px] mt-0.5" style="color:#aec0d7;">Sarah $3,400 · James $3,400</p>
+            </div>
+            <div class="hb-panel-soft rounded-[1rem] p-3.5">
+              <p class="hb-kicker text-[9px]">Bills this month</p>
+              <p class="text-xl font-semibold text-hb-ink mt-1.5" style="letter-spacing:-0.03em;">$2,100</p>
+              <p class="text-[10px] mt-0.5" style="color:#aec0d7;">Rent, utilities, subscriptions</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Feature 2 -->
-        <div class="feature-card card-glow bg-white rounded-3xl p-8 border border-slate-100">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"/></svg>
+        <!-- Savings goals -->
+        <div class="hb-panel-mint rounded-[1.75rem] p-7">
+          <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center mb-4" style="background:rgba(22,153,90,0.2);border:1px solid rgba(22,153,90,0.3);">
+            <svg class="w-5 h-5" style="color:#4ade80;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75"/></svg>
           </div>
-          <h3 class="text-lg font-bold text-slate-900">AI financial coach</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Your personal Coach Alex knows your income, spending patterns, savings goals, and bills. Ask anything — get advice that actually fits your life, not generic tips.</p>
+          <h3 class="text-base font-bold text-hb-ink">Savings goals</h3>
+          <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Set goals for holidays, emergencies, or anything else. Track progress together and get coach nudges when you're ahead or behind.</p>
+          <div class="mt-4 hb-progress-track rounded-full h-1.5 overflow-hidden">
+            <div class="hb-progress-fill h-full rounded-full" style="width:72%"></div>
+          </div>
+          <p class="text-xs mt-1.5" style="color:#4ade80;">72% — Holiday fund on track</p>
         </div>
 
-        <!-- Feature 3 -->
-        <div class="feature-card card-glow bg-white rounded-3xl p-8 border border-slate-100">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"/></svg>
+        <!-- Bills tracker -->
+        <div class="hb-surface-card rounded-[1.75rem] p-7">
+          <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center mb-4" style="background:rgba(82,113,157,0.2);border:1px solid rgba(82,113,157,0.3);">
+            <svg class="w-5 h-5 text-hb-ink-soft" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25Z"/></svg>
           </div>
-          <h3 class="text-lg font-bold text-slate-900">Savings goals</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Holiday, new car, emergency fund — set goals together and watch your progress. Your coach nudges you when you're ahead or behind.</p>
+          <h3 class="text-base font-bold text-hb-ink">Recurring bills</h3>
+          <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Every subscription, rent payment, and utility in one list. Know your fixed costs before the month starts, not after.</p>
         </div>
 
-        <!-- Feature 4 -->
-        <div class="feature-card card-glow bg-white rounded-3xl p-8 border border-slate-100">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"/></svg>
+        <!-- Multi-currency -->
+        <div class="hb-surface-card rounded-[1.75rem] p-7">
+          <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center mb-4" style="background:rgba(82,113,157,0.2);border:1px solid rgba(82,113,157,0.3);">
+            <svg class="w-5 h-5 text-hb-ink-soft" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
           </div>
-          <h3 class="text-lg font-bold text-slate-900">Recurring bills tracker</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Every subscription, rent, and bill in one place. Know exactly what's coming out each month so there are no surprises when payday hits.</p>
+          <h3 class="text-base font-bold text-hb-ink">Multi-currency</h3>
+          <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Earn in USD, spend in THB, report in GBP. Honey Budget converts automatically so your dashboard always makes sense.</p>
         </div>
 
-        <!-- Feature 5 -->
-        <div class="feature-card card-glow bg-white rounded-3xl p-8 border border-slate-100">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+        <!-- Solo mode -->
+        <div class="hb-panel-gold rounded-[1.75rem] p-7">
+          <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center mb-4" style="background:rgba(243,191,41,0.15);border:1px solid rgba(243,191,41,0.25);">
+            <svg class="w-5 h-5" style="color:#f3bf29;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
           </div>
-          <h3 class="text-lg font-bold text-slate-900">Multi-currency support</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Living abroad or earning in different currencies? Honey Budget handles it — automatic exchange rates, display in your currency of choice.</p>
-        </div>
-
-        <!-- Feature 6 -->
-        <div class="feature-card card-glow bg-gradient-to-br from-navy-800 to-navy-900 rounded-3xl p-8 border border-slate-700">
-          <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 8.25h3m-3 3h3m-3 3h3"/></svg>
-          </div>
-          <h3 class="text-lg font-bold text-white">Works solo too</h3>
-          <p class="mt-2 text-slate-300 text-sm leading-relaxed">Not in a couple yet — or just want your own view? Honey Budget works perfectly for individuals. Pair up anytime with a partner invite.</p>
+          <h3 class="text-base font-bold text-hb-ink">Works solo too</h3>
+          <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Not budgeting as a couple yet? Everything works perfectly on your own. Invite a partner anytime and your data carries over.</p>
         </div>
 
       </div>
     </div>
   </section>
+
+  <div class="section-sep"></div>
+
+  <!-- AI COACH -->
+  <section id="coach" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+
+      <!-- Left: chat mockup -->
+      <div class="order-2 lg:order-1">
+        <div class="hb-surface-card rounded-[2rem] p-5 space-y-3" style="box-shadow:0 40px 80px -20px rgba(2,6,23,0.9);">
+          <div class="flex items-center gap-2 pb-1 border-b" style="border-color:rgba(82,113,157,0.3);">
+            <div class="w-7 h-7 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#f3bf29,#ffd75a);">
+              <svg class="w-4 h-4" style="color:#10253f;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>
+            </div>
+            <span class="text-sm font-semibold text-hb-ink">Coach Alex</span>
+            <span class="ml-auto hb-kicker text-[9px]">AI financial coach</span>
+          </div>
+
+          <!-- Messages -->
+          <div class="hb-panel-soft rounded-[1.2rem] px-4 py-3 text-xs leading-[1.7] text-hb-ink-soft">
+            <span style="color:#aec0d7;">Good morning. Based on your last 30 days:</span> you're spending 62% of household income, which is healthy. Your dining category is running $80 over — everything else is within range. Want me to suggest where to trim?
+          </div>
+
+          <div class="flex justify-end">
+            <div class="rounded-[1.2rem] rounded-br-sm px-4 py-3 text-xs leading-[1.7] text-hb-ink max-w-[75%]" style="background:rgba(36,81,136,0.45);border:1px solid rgba(36,81,136,0.4);">
+              Yes — and add a new Netflix bill for $18 a month
+            </div>
+          </div>
+
+          <div class="hb-panel-soft rounded-[1.2rem] px-4 py-3 text-xs leading-[1.7] text-hb-ink-soft">
+            Done — I've added Netflix at $18/month. For the dining overage, cutting 2 restaurant meals would cover it. Your holiday goal would then hit 100% by May 14th, 3 weeks ahead of schedule.
+          </div>
+
+          <div class="flex items-center gap-2 mt-1">
+            <div class="flex gap-1.5 flex-1 flex-wrap">
+              <span class="text-[10px] px-3 py-1.5 rounded-full cursor-default" style="background:rgba(20,34,58,0.94);border:1px solid rgba(82,113,157,0.4);color:#aec0d7;">Where are we overspending?</span>
+              <span class="text-[10px] px-3 py-1.5 rounded-full cursor-default" style="background:rgba(20,34,58,0.94);border:1px solid rgba(82,113,157,0.4);color:#aec0d7;">Update my income</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: copy -->
+      <div class="order-1 lg:order-2">
+        <p class="hb-kicker mb-4">AI financial coach</p>
+        <h2 class="text-4xl font-black text-hb-ink leading-tight">Advice that fits your life, not generic tips</h2>
+        <p class="mt-5 text-[16px] leading-[1.75] text-hb-ink-soft">Coach Alex knows your income, your partner's income, your spending history, your bills, and your savings goals. Every answer is specific to your actual situation.</p>
+
+        <ul class="mt-7 space-y-4">
+          <li class="flex items-start gap-3 text-sm text-hb-ink-soft">
+            <svg class="w-4 h-4 mt-0.5 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>Ask anything in plain English — "are we on track this month?", "log a $45 grocery run", "which category should we cut first?"</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-hb-ink-soft">
+            <svg class="w-4 h-4 mt-0.5 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>Coach can actually update your budget — add bills, log expenses, or update your income directly from the chat</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm text-hb-ink-soft">
+            <svg class="w-4 h-4 mt-0.5 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>Voice input supported — just talk to it on mobile</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
 
   <!-- HOW IT WORKS -->
-  <section id="how-it-works" class="py-24 px-6 bg-slate-50">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="text-sky-600 font-semibold text-sm uppercase tracking-widest mb-3">Simple setup</p>
-        <h2 class="text-4xl sm:text-5xl font-black text-slate-900 leading-tight">Up and running <br/>in 3 minutes</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="w-14 h-14 rounded-2xl bg-navy-800 text-white font-black text-xl flex items-center justify-center mx-auto mb-5">1</div>
-          <h3 class="font-bold text-slate-900 text-lg">Create your account</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Sign up free in under a minute. Enter your income, pick your currency, and you're in.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-14 h-14 rounded-2xl bg-sky-500 text-white font-black text-xl flex items-center justify-center mx-auto mb-5">2</div>
-          <h3 class="font-bold text-slate-900 text-lg">Invite your partner</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Send your partner a link. They join your shared household in one tap. Both of you see the same dashboard immediately.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-14 h-14 rounded-2xl bg-emerald-500 text-white font-black text-xl flex items-center justify-center mx-auto mb-5">3</div>
-          <h3 class="font-bold text-slate-900 text-lg">Let Coach Alex guide you</h3>
-          <p class="mt-2 text-slate-500 text-sm leading-relaxed">Your AI coach reviews your spending and gives personalised advice. Log expenses, update bills, and set goals — all in the chat.</p>
-        </div>
-      </div>
-
-      <div class="mt-16 text-center">
-        <a href="https://app.honeybudget.app/register" class="inline-flex items-center gap-2 bg-navy-800 text-white font-bold px-10 py-4 rounded-2xl hover:bg-navy-700 transition-colors text-base shadow-lg">
-          Get started free
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-14">
-        <p class="text-sky-600 font-semibold text-sm uppercase tracking-widest mb-3">Real couples</p>
-        <h2 class="text-4xl font-black text-slate-900">Money talks got easier</h2>
+      <div class="mb-14">
+        <p class="hb-kicker mb-3">Getting started</p>
+        <h2 class="text-4xl font-black text-hb-ink">Up and running in minutes</h2>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-3xl p-7 border border-slate-100 shadow-sm">
-          <div class="flex gap-0.5 mb-4">
-            <span class="text-amber-400 text-lg">★★★★★</span>
-          </div>
-          <p class="text-slate-700 text-sm leading-relaxed">"We stopped fighting about money the week we started using this. Having a shared dashboard means we're both on the same page for the first time in years."</p>
-          <div class="flex items-center gap-3 mt-5">
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white font-bold text-sm">S</div>
-            <div>
-              <p class="text-sm font-semibold text-slate-900">Sarah M.</p>
-              <p class="text-xs text-slate-500">Together 4 years</p>
-            </div>
-          </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="hb-surface-card rounded-[1.75rem] p-7">
+          <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center text-sm font-black mb-5" style="background:linear-gradient(135deg,#10253f,#245188);color:white;box-shadow:0 12px 28px -16px rgba(16,37,63,0.7);">1</div>
+          <h3 class="text-base font-bold text-hb-ink">Create your account</h3>
+          <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Sign up free, enter your income and currency. Takes about two minutes. Your dashboard is ready immediately.</p>
         </div>
-        <div class="bg-white rounded-3xl p-7 border border-slate-100 shadow-sm">
-          <div class="flex gap-0.5 mb-4">
-            <span class="text-amber-400 text-lg">★★★★★</span>
-          </div>
-          <p class="text-slate-700 text-sm leading-relaxed">"The AI coach actually knows our situation. It reminded us we were overspending on dining and told us exactly how much to cut. Super practical."</p>
-          <div class="flex items-center gap-3 mt-5">
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center text-white font-bold text-sm">J</div>
-            <div>
-              <p class="text-sm font-semibold text-slate-900">James K.</p>
-              <p class="text-xs text-slate-500">Engaged</p>
-            </div>
-          </div>
+        <div class="hb-surface-card rounded-[1.75rem] p-7">
+          <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center text-sm font-black mb-5" style="background:linear-gradient(135deg,#16995a,#22b36b);color:white;box-shadow:0 12px 28px -16px rgba(22,153,90,0.6);">2</div>
+          <h3 class="text-base font-bold text-hb-ink">Invite your partner</h3>
+          <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Send a link. They create their account and link to your household — one tap and both of you are looking at the same numbers.</p>
         </div>
-        <div class="bg-white rounded-3xl p-7 border border-slate-100 shadow-sm">
-          <div class="flex gap-0.5 mb-4">
-            <span class="text-amber-400 text-lg">★★★★★</span>
-          </div>
-          <p class="text-slate-700 text-sm leading-relaxed">"We earn in different currencies and live abroad. Every other app made this complicated. Honey Budget just handles it. Genuinely impressive."</p>
-          <div class="flex items-center gap-3 mt-5">
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-sm">A</div>
-            <div>
-              <p class="text-sm font-semibold text-slate-900">Ana &amp; Tom</p>
-              <p class="text-xs text-slate-500">Expats in Singapore</p>
-            </div>
-          </div>
+        <div class="hb-panel-gold rounded-[1.75rem] p-7">
+          <div class="w-10 h-10 rounded-[0.9rem] flex items-center justify-center text-sm font-black mb-5" style="background:linear-gradient(135deg,#f3bf29,#ffd75a);color:#10253f;box-shadow:0 12px 28px -16px rgba(243,191,41,0.5);">3</div>
+          <h3 class="text-base font-bold text-hb-ink">Start talking to Coach Alex</h3>
+          <p class="mt-2 text-sm leading-[1.7] text-hb-ink-soft">Set up your coach profile — goals, style, priorities. From there, Alex gives you personalised advice every time you check in.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="section-sep"></div>
+
   <!-- PRICING -->
-  <section id="pricing" class="py-24 px-6 bg-slate-50">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-14">
-        <p class="text-sky-600 font-semibold text-sm uppercase tracking-widest mb-3">Pricing</p>
-        <h2 class="text-4xl sm:text-5xl font-black text-slate-900">Simple. Honest. Fair.</h2>
-        <p class="mt-4 text-slate-500">Start free. Upgrade when you're ready.</p>
+  <section id="pricing" class="py-24 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="mb-14">
+        <p class="hb-kicker mb-3">Pricing</p>
+        <h2 class="text-4xl font-black text-hb-ink">Simple. One price. Partner rides free.</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-5">
+
         <!-- Free -->
-        <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
-          <div>
-            <p class="font-bold text-slate-900 text-lg">Free</p>
-            <p class="text-4xl font-black text-slate-900 mt-2">$0<span class="text-base font-medium text-slate-400">/month</span></p>
-            <p class="text-sm text-slate-500 mt-2">Everything you need to get started</p>
-          </div>
-          <ul class="mt-7 space-y-3 text-sm text-slate-700">
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Shared couples dashboard</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Expense tracking</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Savings goals</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Bills tracker</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>AI coach (basic)</li>
+        <div class="hb-surface-card rounded-[2rem] p-7">
+          <p class="text-sm font-semibold text-hb-ink-soft mb-1">Free</p>
+          <p class="text-4xl font-bold text-hb-ink" style="letter-spacing:-0.04em;">$0<span class="text-base font-medium text-hb-ink-soft">/month</span></p>
+          <p class="text-xs text-hb-ink-soft mt-2 mb-6">Get your household set up and start tracking</p>
+          <ul class="space-y-3 text-sm text-hb-ink-soft">
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Track expenses — cash &amp; card</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Combined household income</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Link a partner</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>History &amp; calendar view</li>
+            <li class="flex items-center gap-2.5" style="color:rgba(174,192,215,0.4);">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>Savings goals
+            </li>
+            <li class="flex items-center gap-2.5" style="color:rgba(174,192,215,0.4);">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>AI Finance Coach
+            </li>
           </ul>
-          <a href="https://app.honeybudget.app/register" class="mt-8 block text-center bg-slate-900 text-white font-semibold py-3.5 rounded-2xl hover:bg-slate-800 transition-colors text-sm">Get started free</a>
+          <a href="https://app.honeybudget.app/register" class="mt-7 block text-center text-sm font-semibold py-3.5 rounded-[1rem] transition-all" style="background:rgba(20,34,58,0.94);border:1px solid rgba(82,113,157,0.4);color:#e5eef6;">Get started free</a>
         </div>
 
-        <!-- Premium -->
-        <div class="bg-navy-800 rounded-3xl p-8 border border-navy-700 shadow-xl relative overflow-hidden">
-          <div class="absolute top-4 right-4 bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full">Most popular</div>
-          <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-white/5 rounded-full"></div>
-          <div>
-            <p class="font-bold text-white text-lg">Premium</p>
-            <p class="text-4xl font-black text-white mt-2">$4.99<span class="text-base font-medium text-slate-400">/month</span></p>
-            <p class="text-sm text-slate-400 mt-2">Full AI coaching experience</p>
-          </div>
-          <ul class="mt-7 space-y-3 text-sm text-slate-200">
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Everything in Free</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Unlimited AI coach conversations</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Coach can update your budget</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Priority support</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>New features first</li>
+        <!-- Pro -->
+        <div class="hb-panel-multi rounded-[2rem] p-7 relative overflow-hidden">
+          <div class="absolute top-5 right-5 text-[10px] font-bold px-3 py-1 rounded-full" style="background:rgba(243,191,41,0.15);color:#f3bf29;border:1px solid rgba(243,191,41,0.25);">Most popular</div>
+          <p class="text-sm font-semibold text-hb-ink-soft mb-1">Pro</p>
+          <p class="text-4xl font-bold text-hb-ink" style="letter-spacing:-0.04em;">$5<span class="text-base font-medium text-hb-ink-soft">/month</span></p>
+          <p class="text-xs text-hb-ink-soft mt-2 mb-6">One subscription covers both partners</p>
+          <ul class="space-y-3 text-sm text-hb-ink-soft">
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Everything in Free</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Savings goals with progress tracking</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>AI Finance Coach — personalised advice</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Deep spending insights &amp; trends</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Recurring bill planner</li>
+            <li class="flex items-center gap-2.5"><svg class="w-4 h-4 flex-shrink-0" style="color:#22b36b;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Partner gets Pro free</li>
           </ul>
-          <a href="https://app.honeybudget.app/register" class="mt-8 block text-center bg-white text-navy-900 font-bold py-3.5 rounded-2xl hover:bg-sky-50 transition-colors text-sm shadow-lg">Start free trial</a>
+          <a href="https://app.honeybudget.app/register" class="hb-button-gold mt-7 block text-center text-sm py-3.5 rounded-[1rem] transition-all">Subscribe — $5 / month</a>
+          <p class="text-center text-[10px] text-hb-ink-soft mt-3">Cancel anytime · Billed monthly</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="gradient-hero py-24 px-6 text-center relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="relative max-w-2xl mx-auto">
-      <p class="text-6xl mb-6">💑</p>
-      <h2 class="text-4xl sm:text-5xl font-black text-white leading-tight">Stop arguing about money.<br/>Start building together.</h2>
-      <p class="mt-5 text-lg text-slate-300 leading-relaxed">Join couples who use Honey Budget to get on the same financial page — and stay there.</p>
-      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="https://app.honeybudget.app/register" class="inline-flex items-center justify-center gap-2 bg-white text-navy-900 font-bold px-10 py-4 rounded-2xl hover:bg-sky-50 transition-colors text-base shadow-xl">
-          Start free — no card needed
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
-        </a>
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="hb-hero-panel rounded-[2.5rem] px-10 py-16 text-center relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 50% 0%, rgba(243,191,41,0.12), transparent 60%);"></div>
+        <div class="relative">
+          <p class="hb-kicker mb-5" style="color:rgba(174,192,215,0.7);">Get started today</p>
+          <h2 class="text-4xl sm:text-5xl font-black text-white leading-tight max-w-2xl mx-auto">The budgeting app your relationship deserves</h2>
+          <p class="mt-5 text-[16px] leading-[1.75] max-w-xl mx-auto" style="color:rgba(174,192,215,0.9);">Join couples who finally have a shared view of their finances — and an AI coach helping them do something with it.</p>
+          <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="https://app.honeybudget.app/register" class="hb-button-gold inline-flex items-center gap-2 px-10 py-4 rounded-[1.2rem] text-[15px] transition-all">
+              Start free — no card needed
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+            </a>
+          </div>
+          <div class="mt-5 flex justify-center gap-5 text-xs" style="color:rgba(174,192,215,0.6);">
+            <span>iOS &amp; Android</span>
+            <span>·</span>
+            <span>Free to start</span>
+            <span>·</span>
+            <span>Partner invite included</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-950 py-12 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-2">
-          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-black text-xs">H</div>
-          <span class="font-bold text-white">Honey Budget</span>
-          <span class="text-slate-500 text-sm ml-2">by Whitzy</span>
+  <footer class="pb-12 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-sep mb-10"></div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs" style="background:linear-gradient(135deg,#f3bf29,#ffd75a);color:#10253f;">H</div>
+          <span class="font-semibold text-hb-ink text-sm">Honey Budget</span>
+          <span class="text-hb-ink-soft text-xs">by Whitzy</span>
         </div>
-        <div class="flex items-center gap-6 text-sm text-slate-400">
-          <a href="mailto:support@honeybudget.app" class="hover:text-white transition-colors">Support</a>
-          <a href="#" class="hover:text-white transition-colors">Privacy</a>
-          <a href="#" class="hover:text-white transition-colors">Terms</a>
+        <div class="flex items-center gap-6 text-xs text-hb-ink-soft">
+          <a href="mailto:support@honeybudget.app" class="hover:text-hb-ink transition-colors">Support</a>
+          <a href="#" class="hover:text-hb-ink transition-colors">Privacy</a>
+          <a href="#" class="hover:text-hb-ink transition-colors">Terms</a>
         </div>
       </div>
-      <p class="mt-8 text-center text-xs text-slate-600">&copy; 2026 Whitzy. All rights reserved. Built for couples. Works solo too.</p>
+      <p class="mt-8 text-center text-xs" style="color:rgba(174,192,215,0.35);">&copy; 2026 Whitzy. All rights reserved. Built for couples. Works solo too.</p>
     </div>
   </footer>
 
